@@ -55,8 +55,21 @@ app.post("/add", async (req, res) => {
 });
 
 
-
-
-app.listen(3000, () => {
-  console.log("Server Started");
+// View All Teams
+app.get("/view", async (req, res) => {
+  try {
+    const teams = await Team.find();
+    res.json(teams);
+  } catch (error) {
+    res.status(500).json(
+        { Status: "Failed", Error: error.message }
+    );
+  }
 });
+
+
+const PORT=3000;
+
+app.listen(PORT,()=>{
+    console.log(`Server is Running on http://localhost:${PORT}`);
+})
